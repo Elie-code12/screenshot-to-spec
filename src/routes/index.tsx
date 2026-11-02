@@ -58,7 +58,7 @@ function Index() {
   };
 
   return (
-    <div className="app-bg relative flex h-screen flex-col gap-4 overflow-hidden p-4 text-gray-800 sm:p-6">
+    <div className="app-bg relative isolate flex h-screen flex-col gap-4 overflow-hidden p-4 text-gray-800 sm:p-6">
       <div aria-hidden className="pointer-events-none absolute -bottom-24 -left-24 -z-10 h-96 w-96 rounded-full bg-red-600/30 blur-3xl" />
       <div aria-hidden className="pointer-events-none absolute -right-24 -top-24 -z-10 h-96 w-96 rounded-full bg-emerald-900/25 blur-3xl" />
 
