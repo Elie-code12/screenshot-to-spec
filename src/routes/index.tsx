@@ -139,7 +139,6 @@ function Index() {
                 </div>
               ),
             )}
-            <div ref={endRef} />
           </div>
         </main>
       </div>
