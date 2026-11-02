@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { Send, Mail, MessageCircle, AlertCircle, Play } from "lucide-react";
 
 import logoAsset from "@/assets/idead-logo.png.asset.json";
+import utLogoAsset from "@/assets/ut-logo-celadon.png.asset.json";
 import { getBotReply } from "@/lib/chat-rules";
 import { Button } from "@/components/ui/button";
 
@@ -72,11 +73,18 @@ function Index() {
       />
 
       <div className="mx-auto w-full max-w-4xl shrink-0 px-4 pt-4 sm:px-6">
-        <header className={`${glass} flex items-center gap-4 px-4 py-4`}>
-          <div className="shrink-0 rounded-xl bg-chat-logo p-2" aria-label="Logo IDEAD en los territorios">
-            <img src={logoAsset.url} alt="IDEAD — En los territorios" className="h-9 w-auto max-w-[35vw] object-contain" />
+        <header className={`${glass} flex flex-wrap items-center gap-x-4 gap-y-3 px-4 py-4`}>
+          <div className="flex items-center gap-3">
+            <div className="shrink-0 rounded-xl bg-chat-logo p-2" aria-label="Logo IDEAD en los territorios">
+              <img src={logoAsset.url} alt="IDEAD — En los territorios" className="h-9 w-auto max-w-[30vw] object-contain" />
+            </div>
+            <img
+              src={utLogoAsset.url}
+              alt="Universidad del Tolima — Conocimiento que transforma"
+              className="h-10 w-auto max-w-[38vw] object-contain"
+            />
           </div>
-          <div>
+          <div className="ml-auto text-right">
             <h1 className="text-xl font-semibold">Soporte Virtual IDEAD</h1>
             <p className="text-sm text-chat-light">Asistencia para docentes · Tu Aula Virtual</p>
           </div>
