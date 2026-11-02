@@ -21,7 +21,7 @@ export const Route = createFileRoute("/")({
 
 type Msg =
   | { id: number; role: "user"; text: string }
-  | { id: number; role: "bot"; title: string; steps: string[]; video?: string }
+  | { id: number; role: "bot"; title: string; steps: string[]; video?: string | undefined }
   | { id: number; role: "fallback" };
 
 const glass = "bg-white/60 backdrop-blur-md border border-white/50 shadow-lg shadow-gray-200/50";
