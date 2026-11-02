@@ -39,10 +39,11 @@ function Index() {
     },
   ]);
   const [input, setInput] = useState("");
-  const endRef = useRef<HTMLDivElement>(null);
+  const chatRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    endRef.current?.scrollIntoView({ behavior: "smooth" });
+    const el = chatRef.current;
+    if (el) el.scrollTop = el.scrollHeight;
   }, [msgs]);
 
   const send = (e: React.FormEvent) => {
