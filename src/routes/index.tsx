@@ -1,6 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
-import { Send, GraduationCap, Mail, MessageCircle, AlertCircle } from "lucide-react";
+import { Send, Mail, MessageCircle, AlertCircle, Play } from "lucide-react";
+
+import logoAsset from "@/assets/idead-logo.png.asset.json";
+import { getBotReply } from "@/lib/chat-rules";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -18,27 +21,8 @@ export const Route = createFileRoute("/")({
 
 type Msg =
   | { id: number; role: "user"; text: string }
-  | { id: number; role: "bot"; title: string; steps: string[] }
+  | { id: number; role: "bot"; title: string; steps: string[]; video?: string }
   | { id: number; role: "fallback" };
-
-const RESPONSES: Record<string, { title: string; steps: string[] }> = {
-  "configurar foro": {
-    title: "Para configurar un foro en Tu Aula Virtual (Moodle 3.9), sigue estos 3 pasos:",
-    steps: [
-      "Haz clic en el ícono de engranaje (arriba a la derecha) y selecciona 'Activar edición'.",
-      "Ubica la semana o tema deseado, haz clic en 'Añadir una actividad o recurso' y selecciona 'Foro'.",
-      "Asigna un Nombre, redacta las instrucciones en la Descripción, elige el Tipo de foro y presiona 'Guardar cambios y regresar al curso'.",
-    ],
-  },
-  "subir archivo": {
-    title: "Para subir un archivo a Tu Aula Virtual (Moodle 3.9), sigue estos 3 pasos:",
-    steps: [
-      "Haz clic en el ícono de engranaje y selecciona 'Activar edición'.",
-      "En la sección correspondiente, haz clic en 'Añadir una actividad o recurso' y elige 'Archivo'.",
-      "Escribe el Nombre del recurso, arrastra tu documento (PDF, Word, etc.) a la caja de subida y presiona 'Guardar cambios y regresar al curso'.",
-    ],
-  },
-};
 
 const glass = "bg-white/60 backdrop-blur-md border border-white/50 shadow-lg shadow-gray-200/50";
 
@@ -47,7 +31,7 @@ function Index() {
     {
       id: 0,
       role: "bot",
-      title: "¡Hola! Soy tu asistente virtual. Prueba escribiendo \"configurar foro\" o \"subir archivo\".",
+      title: '¡Hola! Soy tu asistente virtual. Escribe "hola", "configurar un foro" o "subir un archivo".',
       steps: [],
     },
   ]);
@@ -62,13 +46,12 @@ function Index() {
     e.preventDefault();
     const text = input.trim();
     if (!text) return;
-    const key = text.toLowerCase();
-    const r = RESPONSES[key];
+    const r = getBotReply(text);
     const now = Date.now();
     setMsgs((m) => [
       ...m,
       { id: now, role: "user", text },
-      r ? { id: now + 1, role: "bot", ...r } : { id: now + 1, role: "fallback" },
+      r ? { id: now + 1, role: "bot", title: r.title, steps: r.steps, video: r.video } : { id: now + 1, role: "fallback" },
     ]);
     setInput("");
   };
@@ -76,8 +59,8 @@ function Index() {
   return (
     <div className="mesh-bg flex h-screen flex-col gap-4 p-4 text-gray-800 sm:p-6">
       <header className={`${glass} mx-auto flex w-full max-w-4xl items-center gap-4 rounded-3xl px-6 py-4`}>
-        <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/60 bg-white/70" aria-label="Logo de la universidad">
-          <GraduationCap className="h-6 w-6 text-teal-800" />
+        <div className="flex h-14 shrink-0 items-center rounded-2xl border border-white/60 bg-white/70 px-3" aria-label="Logo IDEAD en los territorios">
+          <img src={logoAsset.url} alt="IDEAD — En los territorios" className="h-9 w-auto" />
         </div>
         <div>
           <h1 className="text-xl font-semibold tracking-tight">Soporte Virtual IDEAD</h1>
@@ -102,6 +85,16 @@ function Index() {
                     <ol className="mt-2 list-decimal space-y-1 pl-5">
                       {m.steps.map((s) => <li key={s}>{s}</li>)}
                     </ol>
+                  )}
+                  {m.video && (
+                    <a
+                      href={m.video}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="mt-3 inline-flex items-center gap-2 rounded-2xl border border-white/60 bg-white/50 px-3 py-2 text-sm font-medium text-teal-800 hover:bg-white/80"
+                    >
+                      <Play className="h-4 w-4" /> Ver el corto video explicativo
+                    </a>
                   )}
                 </div>
               </div>
