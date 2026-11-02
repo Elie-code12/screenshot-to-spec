@@ -61,7 +61,7 @@ function Index() {
   };
 
   return (
-    <div className="relative isolate flex h-screen flex-col overflow-hidden bg-chat-background text-chat-light">
+    <div className="relative isolate flex h-screen flex-col overflow-hidden bg-chat-background font-sans text-[12px] text-chat-light">
       <div
         aria-hidden
         className="pointer-events-none absolute -bottom-40 -left-40 -z-10 h-[52rem] w-[52rem] rounded-full bg-chat-user opacity-40 blur-3xl"
@@ -77,8 +77,8 @@ function Index() {
             <img src={logoAsset.url} alt="IDEAD — En los territorios" className="h-9 w-auto max-w-[35vw] object-contain" />
           </div>
           <div>
-            <h1 className="text-xl font-semibold">Soporte Virtual IDEAD</h1>
-            <p className="text-sm text-chat-light">Asistencia para docentes · Tu Aula Virtual</p>
+            <h1 className="text-sm font-semibold">Soporte Virtual IDEAD</h1>
+            <p className="text-[12px] text-chat-light">Asistencia para docentes · Tu Aula Virtual</p>
           </div>
         </header>
       </div>
@@ -107,7 +107,7 @@ function Index() {
                         href={m.video}
                         target="_blank"
                         rel="noreferrer"
-                        className="mt-3 inline-flex items-center gap-2 rounded-xl bg-chat-light/60 px-3 py-2 text-sm font-medium text-chat-background transition hover:bg-chat-light"
+                        className="mt-3 inline-flex items-center gap-2 rounded-xl bg-chat-light/60 px-3 py-2 text-[12px] font-medium text-chat-background transition hover:bg-chat-light"
                       >
                         <Play className="h-4 w-4" /> Ver el corto video explicativo
                       </a>
@@ -121,7 +121,7 @@ function Index() {
                       <AlertCircle className="h-5 w-5 shrink-0 text-chat-background" />
                       No puedo clasificar tu consulta
                     </div>
-                    <p className="mt-1 text-sm text-chat-background">Comunícate con el equipo de la UPMT:</p>
+                    <p className="mt-1 text-[12px] text-chat-background">Comunícate con el equipo de la UPMT:</p>
                     <div className="mt-3 space-y-2">
                       <a href="mailto:upmt@ut.edu.co" className="flex items-center gap-3 rounded-xl bg-chat-light/60 px-3 py-2 hover:bg-chat-light">
                         <Mail className="h-4 w-4 shrink-0 text-chat-background" /> upmt@ut.edu.co
@@ -153,7 +153,7 @@ function Index() {
           />
           <Button
             type="submit"
-            className="h-12 shrink-0 rounded-full bg-chat-celadon px-5 py-3 font-medium text-chat-background shadow-md hover:bg-chat-celadon/90"
+            className="h-12 shrink-0 rounded-full bg-chat-celadon px-5 py-3 text-[12px] font-medium text-chat-background shadow-md hover:bg-chat-celadon/90"
           >
             <Send className="h-4 w-4" /> Enviar
           </Button>
