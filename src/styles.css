@@ -59,9 +59,19 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+  --color-chat-background: var(--chat-background);
+  --color-chat-user: var(--chat-user);
+  --color-chat-celadon: var(--chat-celadon);
+  --color-chat-light: var(--chat-light);
+  --color-chat-logo: var(--chat-logo);
 }
 
 :root {
+  --chat-background: #211113;
+  --chat-user: #6D2634;
+  --chat-celadon: #88A99A;
+  --chat-light: #DCE0C3;
+  --chat-logo: #FFFFFF;
   --radius: 0.625rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.129 0.042 264.695);
@@ -143,11 +153,3 @@
   }
 }
 
-.mesh-bg {
-  background-color: oklch(0.98 0.01 200);
-  background-image:
-    radial-gradient(at 10% 10%, oklch(0.88 0.08 180) 0, transparent 50%),
-    radial-gradient(at 90% 15%, oklch(0.87 0.07 295) 0, transparent 50%),
-    radial-gradient(at 80% 90%, oklch(0.92 0.05 355) 0, transparent 50%),
-    radial-gradient(at 15% 85%, oklch(0.99 0 0) 0, transparent 50%);
-}

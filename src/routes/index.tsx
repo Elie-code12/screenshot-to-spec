@@ -4,6 +4,7 @@ import { Send, Mail, MessageCircle, AlertCircle, Play } from "lucide-react";
 
 import logoAsset from "@/assets/idead-logo.png.asset.json";
 import { getBotReply } from "@/lib/chat-rules";
+import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -24,7 +25,7 @@ type Msg =
   | { id: number; role: "bot"; title: string; steps: string[]; video?: string | undefined }
   | { id: number; role: "fallback" };
 
-const glass = "bg-white/60 backdrop-blur-md border border-white/50 shadow-lg shadow-gray-200/50";
+const botBubble = "bg-gradient-to-r from-chat-celadon to-chat-light text-chat-background shadow-md";
 
 function Index() {
   const [msgs, setMsgs] = useState<Msg[]>([
@@ -57,29 +58,31 @@ function Index() {
   };
 
   return (
-    <div className="mesh-bg flex h-screen flex-col gap-4 p-4 text-gray-800 sm:p-6">
-      <header className={`${glass} mx-auto flex w-full max-w-4xl items-center gap-4 rounded-3xl px-6 py-4`}>
-        <div className="flex h-14 shrink-0 items-center rounded-2xl border border-white/60 bg-white/70 px-3" aria-label="Logo IDEAD en los territorios">
-          <img src={logoAsset.url} alt="IDEAD — En los territorios" className="h-9 w-auto" />
+    <div className="flex h-screen flex-col overflow-hidden bg-chat-background text-chat-light">
+      <header className="shrink-0 border-b border-chat-user bg-chat-background/90">
+        <div className="mx-auto flex w-full max-w-4xl items-center gap-4 px-4 py-4 sm:px-6">
+        <div className="shrink-0 rounded-xl bg-chat-logo p-2" aria-label="Logo IDEAD en los territorios">
+          <img src={logoAsset.url} alt="IDEAD — En los territorios" className="h-9 w-auto max-w-[35vw] object-contain" />
         </div>
         <div>
-          <h1 className="text-xl font-semibold tracking-tight">Soporte Virtual IDEAD</h1>
-          <p className="text-sm text-gray-500">Asistencia para docentes · Tu Aula Virtual</p>
+          <h1 className="text-xl font-semibold">Soporte Virtual IDEAD</h1>
+          <p className="text-sm text-chat-light">Asistencia para docentes · Tu Aula Virtual</p>
+        </div>
         </div>
       </header>
 
-      <main className={`${glass} mx-auto w-full max-w-4xl flex-1 overflow-y-auto rounded-3xl p-4 sm:p-6`}>
+      <main className="mx-auto min-h-0 w-full max-w-4xl flex-1 overflow-y-auto p-4">
         <div className="flex flex-col gap-4">
           {msgs.map((m) =>
             m.role === "user" ? (
               <div key={m.id} className="flex justify-end">
-                <div className="max-w-[80%] rounded-2xl rounded-br-md bg-teal-800 px-4 py-3 text-white shadow-md">
+                <div className="max-w-[80%] break-words rounded-2xl bg-chat-user px-4 py-3 text-chat-light shadow-md">
                   {m.text}
                 </div>
               </div>
             ) : m.role === "bot" ? (
               <div key={m.id} className="flex justify-start">
-                <div className={`${glass} max-w-[80%] rounded-2xl rounded-bl-md px-4 py-3`}>
+                <div className={`${botBubble} max-w-[90%] break-words rounded-2xl rounded-bl-md px-4 py-3 sm:max-w-[80%]`}>
                   <p>{m.title}</p>
                   {m.steps.length > 0 && (
                     <ol className="mt-2 list-decimal space-y-1 pl-5">
@@ -91,7 +94,7 @@ function Index() {
                       href={m.video}
                       target="_blank"
                       rel="noreferrer"
-                      className="mt-3 inline-flex items-center gap-2 rounded-2xl border border-white/60 bg-white/50 px-3 py-2 text-sm font-medium text-teal-800 hover:bg-white/80"
+                      className="mt-3 inline-flex items-center gap-2 rounded-xl bg-chat-light/60 px-3 py-2 text-sm font-medium text-chat-background transition hover:bg-chat-light"
                     >
                       <Play className="h-4 w-4" /> Ver el corto video explicativo
                     </a>
@@ -100,18 +103,18 @@ function Index() {
               </div>
             ) : (
               <div key={m.id} className="flex justify-start">
-                <div className={`${glass} w-full max-w-sm rounded-3xl p-5`}>
+                <div className={`${botBubble} w-full max-w-sm rounded-2xl p-5`}>
                   <div className="flex items-center gap-2 font-semibold">
-                    <AlertCircle className="h-5 w-5 text-teal-800" />
+                    <AlertCircle className="h-5 w-5 shrink-0 text-chat-background" />
                     No puedo clasificar tu consulta
                   </div>
-                  <p className="mt-1 text-sm text-gray-600">Comunícate con el equipo de la UPMT:</p>
+                  <p className="mt-1 text-sm text-chat-background">Comunícate con el equipo de la UPMT:</p>
                   <div className="mt-3 space-y-2">
-                    <a href="mailto:upmt@ut.edu.co" className="flex items-center gap-3 rounded-2xl border border-white/60 bg-white/50 px-3 py-2 hover:bg-white/80">
-                      <Mail className="h-4 w-4 text-teal-800" /> upmt@ut.edu.co
+                    <a href="mailto:upmt@ut.edu.co" className="flex items-center gap-3 rounded-xl bg-chat-light/60 px-3 py-2 hover:bg-chat-light">
+                      <Mail className="h-4 w-4 shrink-0 text-chat-background" /> upmt@ut.edu.co
                     </a>
-                    <a href="https://wa.me/573216574352" target="_blank" rel="noreferrer" className="flex items-center gap-3 rounded-2xl border border-white/60 bg-white/50 px-3 py-2 hover:bg-white/80">
-                      <MessageCircle className="h-4 w-4 text-teal-800" /> WhatsApp: 321 657 4352
+                    <a href="https://wa.me/573216574352" target="_blank" rel="noreferrer" className="flex items-center gap-3 rounded-xl bg-chat-light/60 px-3 py-2 hover:bg-chat-light">
+                      <MessageCircle className="h-4 w-4 shrink-0 text-chat-background" /> WhatsApp: 321 657 4352
                     </a>
                   </div>
                 </div>
@@ -122,17 +125,19 @@ function Index() {
         </div>
       </main>
 
-      <form onSubmit={send} className={`${glass} mx-auto flex w-full max-w-4xl items-center gap-3 rounded-3xl p-3`}>
+      <div className="shrink-0 border-t border-chat-user bg-chat-background/90">
+      <form onSubmit={send} className="mx-auto flex w-full max-w-4xl items-center gap-3 p-3">
         <input
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder="Escribe tu consulta…"
-          className="flex-1 rounded-2xl bg-white/40 px-4 py-3 text-gray-800 placeholder:text-gray-500 outline-none focus:bg-white/70"
+          className="min-w-0 flex-1 border-0 bg-transparent px-4 py-3 text-chat-light placeholder:text-chat-celadon/70 outline-none focus:ring-0"
         />
-        <button type="submit" className="flex items-center gap-2 rounded-2xl bg-teal-800 px-5 py-3 font-medium text-white shadow-md transition hover:bg-teal-900">
+        <Button type="submit" className="h-12 shrink-0 rounded-full bg-chat-celadon px-5 py-3 font-medium text-chat-background shadow-md hover:bg-chat-celadon/90">
           <Send className="h-4 w-4" /> Enviar
-        </button>
+        </Button>
       </form>
+      </div>
     </div>
   );
 }
