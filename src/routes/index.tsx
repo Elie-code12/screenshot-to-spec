@@ -64,11 +64,11 @@ function Index() {
     <div className="relative isolate flex h-screen flex-col overflow-hidden bg-chat-background text-chat-light">
       <div
         aria-hidden
-        className="pointer-events-none absolute -bottom-32 -left-32 -z-10 h-[34rem] w-[34rem] rounded-full bg-chat-user opacity-40 blur-3xl"
+        className="pointer-events-none absolute -bottom-40 -left-40 -z-10 h-[52rem] w-[52rem] rounded-full bg-chat-user opacity-40 blur-3xl"
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute -right-32 -top-32 -z-10 h-[34rem] w-[34rem] rounded-full bg-chat-celadon opacity-40 blur-3xl"
+        className="pointer-events-none absolute -right-40 -top-40 -z-10 h-[52rem] w-[52rem] rounded-full bg-chat-celadon opacity-40 blur-3xl"
       />
 
       <div className="mx-auto w-full max-w-4xl shrink-0 px-4 pt-4 sm:px-6">
@@ -84,7 +84,7 @@ function Index() {
       </div>
 
       <div className="mx-auto flex min-h-0 w-full max-w-4xl flex-1 flex-col px-4 py-4">
-        <main className={`${glass} min-h-0 flex-1 overflow-y-auto p-4`}>
+        <main ref={chatRef} className={`${glass} min-h-0 flex-1 overflow-y-auto p-4`}>
           <div className="flex flex-col gap-4">
             {msgs.map((m) =>
               m.role === "user" ? (
