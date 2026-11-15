@@ -4,7 +4,7 @@ import { Send, Mail, MessageCircle, AlertCircle, Play } from "lucide-react";
 
 import logoAsset from "@/assets/idead-logo.png.asset.json";
 import utLogoAsset from "@/assets/ut-logo-celadon.png.asset.json";
-import { getBotReply } from "@/lib/chat-rules";
+import { getChatTurn } from "@/lib/chat-rules";
 import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/")({
@@ -40,6 +40,7 @@ function Index() {
     },
   ]);
   const [input, setInput] = useState("");
+  const [failedAttempts, setFailedAttempts] = useState(0);
   const chatRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -51,7 +52,9 @@ function Index() {
     e.preventDefault();
     const text = input.trim();
     if (!text) return;
-    const r = getBotReply(text);
+    const turn = getChatTurn(text, failedAttempts);
+    const r = turn.reply;
+    setFailedAttempts(turn.failedAttempts);
     const now = Date.now();
     setMsgs((m) => [
       ...m,

@@ -75,3 +75,24 @@ export function getBotReply(raw: string): BotReply | null {
   }
   return null;
 }
+
+const REFORMULATION_REPLY: BotReply = {
+  kind: "greeting",
+  title: "No logré identificar tu consulta. Recuerda que te puedo orientar exclusivamente sobre cómo configurar un foro o subir un archivo en Tu Aula Virtual. ¿Podrías reformular tu pregunta?",
+  steps: [],
+};
+
+/** HU4: once support takes over, automatic classification stops for this session. */
+export function getChatTurn(raw: string, failedAttempts: number): {
+  failedAttempts: number;
+  reply: BotReply | null;
+} {
+  if (failedAttempts >= 2) return { failedAttempts: 2, reply: null };
+  const reply = getBotReply(raw);
+  if (reply) return { failedAttempts: 0, reply };
+  const nextAttempts = failedAttempts + 1;
+  return {
+    failedAttempts: nextAttempts,
+    reply: nextAttempts === 1 ? REFORMULATION_REPLY : null,
+  };
+}

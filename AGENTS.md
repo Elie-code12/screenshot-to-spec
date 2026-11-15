@@ -10,3 +10,4 @@
 <!-- LOVABLE:END -->
 
 - Keep chat trigger matching and answer wording in `src/lib/chat-rules.ts`, covered by `src/test/chat-rules.test.ts`; route components render replies only. Why: the teacher-facing wording and trigger words change often and must stay verifiable.
+- Keep the consecutive-failure transition in `getChatTurn`, with the counter owned by the chat component; stop classification after support escalation until a fresh session. Why: HU4 escalation must be testable without duplicating reply logic in the view.
